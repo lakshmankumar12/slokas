@@ -1,10 +1,11 @@
 srcdir=$(PWD)/src
 
 # Document definitions
-DOCS := sooktas mahanyasam stotrams
+DOCS := sooktas mahanyasam stotrams upanishads
 sooktas_infile := sooktas.tex
 mahanyasam_infile := mahanyasam.tex
 stotrams_infile := stotrams.tex
+upanishads_infile := upanishads.tex
 
 # Generic function to build any document
 define build_doc
@@ -22,6 +23,9 @@ mahanyasam:
 
 stotrams:
 	$(call build_doc,stotrams,$(stotrams_infile))
+
+upanishads:
+	$(call build_doc,upanishads,$(upanishads_infile))
 
 # Build all documents
 all: $(DOCS)
