@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+\title{Sooktas}
+\author{Ancient Vedic Text}
+\date{\today}
+% you can set margin=0cm if you absolutely want no margin
+\usepackage[a4paper, margin=1cm, right=0.5cm]{geometry}
+\usepackage{fontspec}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+% Remove headers and footers
+\pagestyle{empty}
+
+% Set Devanagari as main font
+\setmainfont{Noto Sans Devanagari}[Script=Devanagari]
+\newfontfamily\englishfont{Noto Sans}
+\newfontfamily\tamilfont{Noto Sans Tamil}[Script=Tamil]
+\newfontfamily\symbolfont{Noto Sans Symbols}
+\newcommand{\eng}[1]{{\englishfont#1}}
+\newcommand{\tamil}[1]{{\tamilfont#1}}
+\newcommand{\symbol}[1]{{\symbolfont#1}}
+
+\begin{document}
+% The first number (24) is the font size in points
+% The second number (36) is the baseline skip - the distance between lines, also in points
+\fontsize{24}{36}\selectfont
+
+\input{mahanyasam_slokas.tex}
+\input{laghunyasam.tex}
+\input{rudram.tex}
+\input{chamakam.tex}
+
+
+\end{document}
