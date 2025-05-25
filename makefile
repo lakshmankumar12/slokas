@@ -1,22 +1,28 @@
-
 srcdir=$(PWD)/src
-outfile := sooktas.pdf
-infile := sooktas.tex
-basename := $(patsubst %.pdf,%,$(outfile))
 
-sooktas:
-	( cd $(srcdir) && rm $(outfile) && \
-	docker run --rm -v $(srcdir):/data moss_xelatex_fonts xelatex -interaction=batchmode -no-pdf-info -jobname=$(basename) -output-directory=./ $(infile) ) || true
-	test -f $(srcdir)/$(outfile)
-
-mahanyasam_outfile := mahanyasam.pdf
+# Document definitions
+DOCS := sooktas mahanyasam
+sooktas_infile := sooktas.tex
 mahanyasam_infile := mahanyasam.tex
-mahanyasam_basename := $(patsubst %.pdf,%,$(mahanyasam_outfile))
+
+# Generic function to build any document
+define build_doc
+	( cd $(srcdir) && rm -f $(1).pdf && \
+		docker run --rm -v $(srcdir):/data moss_xelatex_fonts xelatex -interaction=batchmode -no-pdf-info -jobname=$(1) -output-directory=./ $(2) ) || true
+	test -f $(srcdir)/$(1).pdf
+endef
+
+# Individual targets
+sooktas:
+	$(call build_doc,sooktas,$(sooktas_infile))
 
 mahanyasam:
-	( cd $(srcdir) && rm -f $(mahanyasam_outfile) && \
-		docker run --rm -v $(srcdir):/data moss_xelatex_fonts xelatex -interaction=batchmode -no-pdf-info -jobname=$(mahanyasam_basename) -output-directory=./ $(mahanyasam_infile) ) || true
-	test -f $(srcdir)/$(mahanyasam_outfile)
+	$(call build_doc,mahanyasam,$(mahanyasam_infile))
+
+# Build all documents
+all: $(DOCS)
 
 clean:
 	rm -f src/*log src/*aux
+
+.PHONY: sooktas mahanyasam all clean
