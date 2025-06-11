@@ -1,4 +1,4 @@
-*.pdf
+src/*.pdf
 *.aux
 *.log
 *.epub
