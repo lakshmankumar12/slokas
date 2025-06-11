@@ -27,8 +27,11 @@ stotrams:
 upanishads:
 	$(call build_doc,upanishads,$(upanishads_infile))
 
+publish:
+	python generate_pdf_index.py
+
 # Build all documents
-all: $(DOCS)
+all: $(DOCS) publish
 
 clean:
 	rm -f src/*log src/*aux
