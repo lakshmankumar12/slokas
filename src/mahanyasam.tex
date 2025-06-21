@@ -8,6 +8,7 @@
 \usepackage{setspace}
 \usepackage{hyperref}
 \usepackage{bookmark}
+\usepackage{longtable}
 
 % Remove headers and footers
 \pagestyle{empty}
@@ -20,6 +21,12 @@
 \newcommand{\eng}[1]{{\englishfont#1}}
 \newcommand{\tamil}[1]{{\tamilfont#1}}
 \newcommand{\symbol}[1]{{\symbolfont#1}}
+
+\let\oldlongtable\longtable
+\let\endoldlongtable\endlongtable
+\renewenvironment{longtable}
+  {\fontsize{20}{30}\selectfont\oldlongtable}
+  {\endoldlongtable}
 
 \begin{document}
 % The first number (20) is the font size in points
