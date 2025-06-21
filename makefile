@@ -28,6 +28,7 @@ upanishads:
 	$(call build_doc,upanishads,$(upanishads_infile))
 
 publish:
+	cp src/*pdf docs/
 	python generate_pdf_index.py
 
 # Build all documents
