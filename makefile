@@ -10,7 +10,8 @@ upanishads_infile := upanishads.tex
 # Generic function to build any document
 define build_doc
 	( cd $(srcdir) && rm -f $(1).pdf && \
-		docker run --rm -v $(srcdir):/data moss_xelatex_fonts xelatex -interaction=batchmode -no-pdf-info -jobname=$(1) -output-directory=./ $(2) ) || true
+		[ ! -f $(1).pdf ] || (echo "Error: $(1).pdf still exists after rm" && exit 1) )
+	docker run --rm -v $(srcdir):/data moss_xelatex_fonts xelatex -interaction=batchmode -no-pdf-info -jobname=$(1) -output-directory=./ $(2) || true
 	test -f $(srcdir)/$(1).pdf
 endef
 
